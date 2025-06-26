@@ -1,0 +1,7 @@
+flutter_native_splash:
+  color: "#ffffff"
+  image: assets/budget_bee_icon_only.png
+  android: true
+  ios: true
+  color_dark: "#000000"
+  image_dark: assets/budget_bee_icon_only.png
