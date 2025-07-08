@@ -27,7 +27,6 @@ class intropage1 extends StatelessWidget {
               fontSize: 26,
               fontWeight: FontWeight.bold,
               color: Colors.yellowAccent,
-              letterSpacing: 2,
             ),
           ),
           
@@ -42,7 +41,7 @@ class intropage1 extends StatelessWidget {
                 fontSize: 18,
                 color: Colors.white70,
               ),
-              textAlign: TextAlign.right,
+              textAlign: TextAlign.center,
             ),
           ),
         ],

@@ -5,10 +5,10 @@ class SplashScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.black, // or any background color
+      backgroundColor: Colors.black, 
       body: Center(
         child: ClipRRect(
-          borderRadius: BorderRadius.circular(32), // Adjust the value for more/less curve
+          borderRadius: BorderRadius.circular(32), 
           child: Image.asset(
             'assets/budget_bee_icon_only.png',
             width: 200,

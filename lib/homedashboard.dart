@@ -60,7 +60,7 @@ class _HomeDashboardState extends State<HomeDashboard> {
                       ),
                     ),
                     leftTitles: AxisTitles(
-                      sideTitles: SideTitles(showTitles: true),
+                      sideTitles: SideTitles(showTitles: false),
                     ),
                     topTitles: AxisTitles(
                         sideTitles: SideTitles(showTitles: false)),
@@ -90,7 +90,6 @@ class _HomeDashboardState extends State<HomeDashboard> {
             ),
             SizedBox(height: 20),
 
-            // Easy Operations
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceAround,
               children: ['Transfer', 'Receipt', 'Add Expense', 'Add Income']
@@ -107,8 +106,6 @@ class _HomeDashboardState extends State<HomeDashboard> {
                   .toList(),
             ),
             SizedBox(height: 20),
-
-            // Summary Highlights
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
@@ -119,7 +116,6 @@ class _HomeDashboardState extends State<HomeDashboard> {
             ),
             SizedBox(height: 20),
 
-            // Recent Transactions
             Text('Recent Transactions',
                 style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold)),
             Divider(),
@@ -131,7 +127,39 @@ class _HomeDashboardState extends State<HomeDashboard> {
         ),
       ),
       floatingActionButton: FloatingActionButton(
-        onPressed: () {},
+        onPressed: () {
+  showModalBottomSheet(
+    context: context,
+    backgroundColor: Colors.white,
+    shape: RoundedRectangleBorder(
+      borderRadius: BorderRadius.vertical(top: Radius.circular(20)),
+    ),
+    builder: (context) => Padding(
+      padding: const EdgeInsets.all(20),
+      child: Column(
+        mainAxisSize: MainAxisSize.min,
+        children: [
+          ListTile(
+            leading: Icon(Icons.remove_circle, color: Colors.red),
+            title: Text('Add Expense'),
+            onTap: () {
+              Navigator.pop(context);
+           
+            },
+          ),
+          ListTile(
+            leading: Icon(Icons.add_circle, color: Colors.green),
+            title: Text('Add Income'),
+            onTap: () {
+              Navigator.pop(context);
+        
+            },
+          ),
+        ],
+      ),
+    ),
+  );
+},
         backgroundColor: Colors.indigo,
         child: Icon(Icons.add),
       ),

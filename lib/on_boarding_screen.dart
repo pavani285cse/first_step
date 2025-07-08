@@ -61,7 +61,7 @@ class _OnBordingScreenState extends State<on_boarding_screen> {
                             context,
                             MaterialPageRoute(
                               builder: (context) {
-                                return HomeDashboard(); // Replace with your login page
+                                return HomeDashboard(); 
                               },
                             ),
                           );

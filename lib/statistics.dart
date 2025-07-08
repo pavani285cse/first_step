@@ -23,7 +23,7 @@ class _StatisticsPageState extends State<StatisticsPage> {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              // Time Filter Chips
+              
               Wrap(
                 spacing: 8,
                 children: filters.map((filter) {
@@ -38,7 +38,7 @@ class _StatisticsPageState extends State<StatisticsPage> {
               ),
               SizedBox(height: 20),
 
-              // Income vs Expense Graph
+              
               Text('Income vs Expense',
                   style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold)),
               SizedBox(
@@ -75,7 +75,7 @@ class _StatisticsPageState extends State<StatisticsPage> {
               ),
               SizedBox(height: 20),
 
-              // Pie Chart - Expense Breakdown
+          
               Text('Expense Breakdown by Category',
                   style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold)),
               SizedBox(
@@ -95,12 +95,12 @@ class _StatisticsPageState extends State<StatisticsPage> {
               ),
               SizedBox(height: 20),
 
-              // Savings Rate
+            
               Text('Savings Rate',
                   style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold)),
               SizedBox(height: 10),
               LinearProgressIndicator(
-                value: 0.65, // 65% savings rate
+                value: 0.65, 
                 backgroundColor: Colors.grey[300],
                 valueColor: AlwaysStoppedAnimation<Color>(Colors.green),
               ),
@@ -110,7 +110,7 @@ class _StatisticsPageState extends State<StatisticsPage> {
 
               SizedBox(height: 20),
 
-              // Top Categories
+          
               Text('Top Expense Categories',
                   style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold)),
               SizedBox(height: 10),

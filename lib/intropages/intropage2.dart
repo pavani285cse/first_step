@@ -11,7 +11,7 @@ class intropage2 extends StatelessWidget {
       body: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          // Lottie Animation
+        
           Lottie.asset(
             'assets/bee.json',
             height: 300,
@@ -20,28 +20,26 @@ class intropage2 extends StatelessWidget {
           ),
           const SizedBox(height: 30),
 
-          // Title
+        
           const Text(
             'Understand Your Spending',
             style: TextStyle(
-              fontSize: 20,
+              fontSize: 26,
               fontWeight: FontWeight.bold,
               color: Colors.yellowAccent,
             ),
           ),
 
           const SizedBox(height: 15),
-
-          // Subtitle
           const Padding(
             padding: EdgeInsets.symmetric(horizontal: 20.0),
             child: Text(
               'Get insights with graphs and breakdowns to help you manage better.',
               style: TextStyle(
-                fontSize: 12,
+                fontSize: 18,
                 color: Colors.white70,
               ),
-              textAlign: TextAlign.right,
+              textAlign: TextAlign.center,
             ),
           ),
         ],

@@ -31,7 +31,7 @@ class _TransactionsOverviewState extends State<TransactionsOverview> {
         backgroundColor: Colors.indigo,
         actions: [
           IconButton(icon: Icon(Icons.download), onPressed: () {
-            // Export logic here (e.g. PDF or Excel)
+          
           }),
         ],
       ),
@@ -39,7 +39,7 @@ class _TransactionsOverviewState extends State<TransactionsOverview> {
         padding: const EdgeInsets.all(16),
         child: Column(
           children: [
-            // Total Balance Summary
+    
             Card(
               child: ListTile(
                 title: Text('Net Balance'),
@@ -49,7 +49,7 @@ class _TransactionsOverviewState extends State<TransactionsOverview> {
             ),
             SizedBox(height: 10),
 
-            // Search Field
+          
             TextField(
               decoration: InputDecoration(
                 hintText: 'Search by title, amount, or date',
@@ -64,12 +64,12 @@ class _TransactionsOverviewState extends State<TransactionsOverview> {
             ),
             SizedBox(height: 20),
 
-            // Income Section
+    
             _sectionTitle('Income'),
             ..._filteredItems(incomeList, isIncome: true),
 
             SizedBox(height: 20),
-            // Expense Section
+      
             _sectionTitle('Expenses'),
             ..._filteredItems(expenseList, isIncome: false),
           ],
