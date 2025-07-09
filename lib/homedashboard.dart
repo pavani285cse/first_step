@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:fl_chart/fl_chart.dart';
+import 'AddExpense.dart';
+import 'AddIncome.dart';
 
 class HomeDashboard extends StatefulWidget {
   @override
@@ -143,17 +145,21 @@ class _HomeDashboardState extends State<HomeDashboard> {
             leading: Icon(Icons.remove_circle, color: Colors.red),
             title: Text('Add Expense'),
             onTap: () {
-              Navigator.pop(context);
+               Navigator.pop(context);
+               Navigator.push(context, MaterialPageRoute(builder: (_) => AddExpensePage()));
+         },
+
            
-            },
+          
           ),
           ListTile(
             leading: Icon(Icons.add_circle, color: Colors.green),
             title: Text('Add Income'),
             onTap: () {
               Navigator.pop(context);
-        
-            },
+              Navigator.push(context, MaterialPageRoute(builder: (_) => AddIncomePage()));
+              },
+
           ),
         ],
       ),
