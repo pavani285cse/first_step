@@ -7,10 +7,7 @@ class AddExpensePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: Text('Add Expense'),
-        backgroundColor: Colors.red,
-      ),
+      appBar: AppBar(title: Text('Add Expense'), backgroundColor: Colors.red),
       body: Padding(
         padding: const EdgeInsets.all(16),
         child: Column(
@@ -27,11 +24,13 @@ class AddExpensePage extends StatelessWidget {
             SizedBox(height: 20),
             ElevatedButton(
               onPressed: () {
-                String amount = amountController.text;
-                String description = descriptionController.text;
-                // Add your save logic here
-                print("Expense Added: $amount - $description");
-                Navigator.pop(context);
+                final data = {
+                  'type': 'expense',
+                  'amount': '-\$${amountController.text}',
+                  'description': descriptionController.text,
+                  'color': Colors.red,
+                };
+                Navigator.pop(context, data);
               },
               child: Text('Save'),
               style: ElevatedButton.styleFrom(backgroundColor: Colors.red),
