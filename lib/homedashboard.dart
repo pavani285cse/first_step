@@ -12,7 +12,7 @@ class HomeDashboard extends StatefulWidget {
 }
 
 class _HomeDashboardState extends State<HomeDashboard> {
-  bool _balanceVisible = true;
+  // bool _balanceVisible = true;
   int _selectedIndex = 0;
 
   final List<String> categories = ['Food', 'Rent', 'Shopping', 'Travel'];
@@ -36,18 +36,21 @@ class _HomeDashboardState extends State<HomeDashboard> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
+      appBar:_selectedIndex==0
+      ?  AppBar(
         title: Text('Welcome back, Pavani!'),
         backgroundColor: Colors.indigo,
-        actions: [
-          IconButton(
-            icon: Icon(
-              _balanceVisible ? Icons.visibility : Icons.visibility_off,
-            ),
-            onPressed: () => setState(() => _balanceVisible = !_balanceVisible),
-          ),
-        ],
-      ),
+        )
+        : null,
+        // actions: [
+        //   IconButton(
+        //     icon: Icon(
+        //       _balanceVisible ? Icons.visibility : Icons.visibility_off,
+        //     ),
+        //     onPressed: () => setState(() => _balanceVisible = !_balanceVisible),
+        //   ),
+        // ],
+      
       body: _selectedIndex == 0
           ? _buildHomeBody()
           : _selectedIndex == 1
@@ -71,46 +74,157 @@ class _HomeDashboardState extends State<HomeDashboard> {
                       mainAxisSize: MainAxisSize.min,
                       children: [
                         ListTile(
-                          leading: Icon(Icons.remove_circle, color: Colors.red),
-                          title: Text('Add Expense', style: TextStyle(color: Colors.black)),
-                          onTap: () async {
-                            Navigator.pop(context);
-                            final result = await Navigator.push(
-                              context,
-                              MaterialPageRoute(builder: (_) => AddExpensePage()),
-                            );
-                            if (result != null) {
-                              setState(() {
-                                _transactions.insert(0, result);
-                              });
-                            }
-                          },
+                                leading: Icon(
+                                  Icons.remove_circle,
+                                  color: Colors.red,
+                                ),
+                                title: Text(
+                                  'Add Expense',
+                                  style: TextStyle(color: Colors.black),
+                                ),
+                                onTap: () async {
+                                  Navigator.pop(context);
+                                  await showDialog(
+                                    context: context,
+                                    builder: (context) {
+                                      String description = '';
+                                      String amount = '';
+                                      return AlertDialog(
+                                        title: Text('Add Expense'),
+                                        content: Column(
+                                          mainAxisSize: MainAxisSize.min,
+                                          children: [
+                                            TextField(
+                                              decoration: InputDecoration(
+                                                labelText: 'Description',
+                                              ),
+                                              onChanged:
+                                                  (value) =>
+                                                      description = value,
+                                            ),
+                                            TextField(
+                                              decoration: InputDecoration(
+                                                labelText: 'Amount',
+                                              ),
+                                              keyboardType:
+                                                  TextInputType.number,
+                                              onChanged:
+                                                  (value) => amount = value,
+                                            ),
+                                          ],
+                                        ),
+                                        actions: [
+                                          TextButton(
+                                            onPressed:
+                                                () => Navigator.pop(context),
+                                            child: Text('Cancel'),
+                                          ),
+                                          ElevatedButton(
+                                            onPressed: () {
+                                              if (description.isNotEmpty &&
+                                                  amount.isNotEmpty) {
+                                                setState(() {
+                                                  _transactions.insert(0, {
+                                                    'description': description,
+                                                    'amount': '-\$${amount}',
+                                                    'date': DateTime.now()
+                                                        .toString()
+                                                        .substring(0, 10),
+                                                    'color': Colors.red,
+                                                  });
+                                                });
+                                                Navigator.pop(context);
+                                              }
+                                            },
+                                            child: Text('Add'),
+                                          ),
+                                        ],
+                                      );
+                                    },
+                                  );
+                                },
+                              ),
+
+                              ListTile(
+                                leading: Icon(
+                                  Icons.add_circle,
+                                  color: Colors.green,
+                                ),
+                                title: Text(
+                                  'Add Income',
+                                  style: TextStyle(color: Colors.black),
+                                ),
+                                onTap: () async {
+                                  Navigator.pop(context);
+                                  await showDialog(
+                                    context: context,
+                                    builder: (context) {
+                                      String description = '';
+                                      String amount = '';
+                                      return AlertDialog(
+                                        title: Text('Add Income'),
+                                        content: Column(
+                                          mainAxisSize: MainAxisSize.min,
+                                          children: [
+                                            TextField(
+                                              decoration: InputDecoration(
+                                                labelText: 'Description',
+                                              ),
+                                              onChanged:
+                                                  (value) =>
+                                                      description = value,
+                                            ),
+                                            TextField(
+                                              decoration: InputDecoration(
+                                                labelText: 'Amount',
+                                              ),
+                                              keyboardType:
+                                                  TextInputType.number,
+                                              onChanged:
+                                                  (value) => amount = value,
+                                            ),
+                                          ],
+                                        ),
+                                        actions: [
+                                          TextButton(
+                                            onPressed:
+                                                () => Navigator.pop(context),
+                                            child: Text('Cancel'),
+                                          ),
+                                          ElevatedButton(
+                                            onPressed: () {
+                                              if (description.isNotEmpty &&
+                                                  amount.isNotEmpty) {
+                                                setState(() {
+                                                  _transactions.insert(0, {
+                                                    'description': description,
+                                                    'amount': '+\$${amount}',
+                                                    'date': DateTime.now()
+                                                        .toString()
+                                                        .substring(0, 10),
+                                                    'color': Colors.green,
+                                                  });
+                                                });
+                                                Navigator.pop(context);
+                                              }
+                                            },
+                                            child: Text('Add'),
+                                          ),
+                                        ],
+                                      );
+                                    },
+                                  );
+                                },
+                              ),
+                            ],
+                          ),
                         ),
-                        ListTile(
-                          leading: Icon(Icons.add_circle, color: Colors.green),
-                          title: Text('Add Income', style: TextStyle(color: Colors.black)),
-                          onTap: () async {
-                            Navigator.pop(context);
-                            final result = await Navigator.push(
-                              context,
-                              MaterialPageRoute(builder: (_) => AddIncomePage()),
-                            );
-                            if (result != null) {
-                              setState(() {
-                                _transactions.insert(0, result);
-                              });
-                            }
-                          },
-                        ),
-                      ],
-                    ),
-                  ),
-                );
-              },
-              backgroundColor: Colors.indigo,
-              child: Icon(Icons.add),
-            )
-          : null,
+                  );
+                },
+                backgroundColor: Colors.indigo,
+                child: Icon(Icons.add),
+              )
+              : null,
 
       bottomNavigationBar: BottomNavigationBar(
         currentIndex: _selectedIndex,
@@ -140,8 +254,14 @@ class _HomeDashboardState extends State<HomeDashboard> {
         items: [
           BottomNavigationBarItem(icon: Icon(Icons.home), label: 'Home'),
           BottomNavigationBarItem(icon: Icon(Icons.pie_chart), label: 'Stats'),
-          BottomNavigationBarItem(icon: Icon(Icons.list), label: 'Transactions'),
-          BottomNavigationBarItem(icon: Icon(Icons.receipt_long), label: 'Add Bill'),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.list),
+            label: 'Transactions',
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.receipt_long),
+            label: 'Add Bill',
+          ),
         ],
       ),
     );
@@ -172,16 +292,24 @@ class _HomeDashboardState extends State<HomeDashboard> {
                         return SideTitleWidget(
                           axisSide: meta.axisSide,
                           child: Text(
-                            index >= 0 && index < categories.length ? categories[index] : '',
+                            index >= 0 && index < categories.length
+                                ? categories[index]
+                                : '',
                             style: TextStyle(fontSize: 12),
                           ),
                         );
                       },
                     ),
                   ),
-                  leftTitles: AxisTitles(sideTitles: SideTitles(showTitles: false)),
-                  topTitles: AxisTitles(sideTitles: SideTitles(showTitles: false)),
-                  rightTitles: AxisTitles(sideTitles: SideTitles(showTitles: false)),
+                  leftTitles: AxisTitles(
+                    sideTitles: SideTitles(showTitles: false),
+                  ),
+                  topTitles: AxisTitles(
+                    sideTitles: SideTitles(showTitles: false),
+                  ),
+                  rightTitles: AxisTitles(
+                    sideTitles: SideTitles(showTitles: false),
+                  ),
                 ),
                 barGroups: List.generate(categories.length, (index) {
                   return BarChartGroupData(
@@ -196,7 +324,10 @@ class _HomeDashboardState extends State<HomeDashboard> {
                       BarChartRodData(
                         toY: actual[index],
                         width: 8,
-                        color: actual[index] > budget[index] ? Colors.red : Colors.greenAccent,
+                        color:
+                            actual[index] > budget[index]
+                                ? Colors.red
+                                : Colors.greenAccent,
                         borderRadius: BorderRadius.circular(0),
                       ),
                     ],
@@ -208,20 +339,21 @@ class _HomeDashboardState extends State<HomeDashboard> {
           SizedBox(height: 20),
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceAround,
-            children: ['Transfer', 'Receipt', 'Add Expense', 'Add Income'].map(
-              (label) {
-                return Column(
-                  children: [
-                    CircleAvatar(
-                      backgroundColor: Colors.indigo[100],
-                      child: Icon(Icons.add, color: Colors.indigo),
-                    ),
-                    SizedBox(height: 5),
-                    Text(label, style: TextStyle(fontSize: 12)),
-                  ],
-                );
-              },
-            ).toList(),
+            children:
+                ['Transfer', 'Receipt', 'Add Expense', 'Add Income'].map((
+                  label,
+                ) {
+                  return Column(
+                    children: [
+                      CircleAvatar(
+                        backgroundColor: Colors.indigo[100],
+                        child: Icon(Icons.add, color: Colors.indigo),
+                      ),
+                      SizedBox(height: 5),
+                      Text(label, style: TextStyle(fontSize: 12)),
+                    ],
+                  );
+                }).toList(),
           ),
           SizedBox(height: 20),
           Row(
@@ -268,7 +400,12 @@ class _HomeDashboardState extends State<HomeDashboard> {
     );
   }
 
-  Widget _transactionTile(String title, String amount, String date, Color color) {
+  Widget _transactionTile(
+    String title,
+    String amount,
+    String date,
+    Color color,
+  ) {
     return ListTile(
       leading: Icon(Icons.account_balance_wallet, color: color),
       title: Text(title),
@@ -280,4 +417,3 @@ class _HomeDashboardState extends State<HomeDashboard> {
     );
   }
 }
-

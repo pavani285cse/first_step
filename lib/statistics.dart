@@ -41,38 +41,128 @@ class _StatisticsPageState extends State<StatisticsPage> {
               
               Text('Income vs Expense',
                   style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold)),
+              // SizedBox(
+              //   height: 200,
+              //   child: LineChart(LineChartData(
+              //     titlesData: FlTitlesData(show: false),
+              //     borderData: FlBorderData(show: false),
+              //     gridData: FlGridData(show: false),
+              //     lineBarsData: [
+              //       LineChartBarData(
+              //         spots: [
+              //           FlSpot(0, 2000),
+              //           FlSpot(1, 3000),
+              //           FlSpot(2, 2500),
+              //           FlSpot(3, 4000),
+              //         ],
+              //         isCurved: true,
+              //         color: Colors.green,
+              //         barWidth: 3,
+              //       ),
+              //       LineChartBarData(
+              //         spots: [
+              //           FlSpot(0, 1800),
+              //           FlSpot(1, 3500),
+              //           FlSpot(2, 2200),
+              //           FlSpot(3, 3800),
+              //         ],
+              //         isCurved: true,
+              //         color: Colors.red,
+              //         barWidth: 3,
+              //       ),
+              //     ],
+              //   )),
+              // ),
               SizedBox(
-                height: 200,
-                child: LineChart(LineChartData(
-                  titlesData: FlTitlesData(show: false),
-                  borderData: FlBorderData(show: false),
-                  gridData: FlGridData(show: false),
-                  lineBarsData: [
-                    LineChartBarData(
-                      spots: [
-                        FlSpot(0, 2000),
-                        FlSpot(1, 3000),
-                        FlSpot(2, 2500),
-                        FlSpot(3, 4000),
-                      ],
-                      isCurved: true,
-                      color: Colors.green,
-                      barWidth: 3,
-                    ),
-                    LineChartBarData(
-                      spots: [
-                        FlSpot(0, 1800),
-                        FlSpot(1, 3500),
-                        FlSpot(2, 2200),
-                        FlSpot(3, 3800),
-                      ],
-                      isCurved: true,
-                      color: Colors.red,
-                      barWidth: 3,
-                    ),
-                  ],
-                )),
-              ),
+  height: 250,
+  child: LineChart(
+    LineChartData(
+      minX: 0,
+      maxX: 3,
+      minY: 1500,
+      maxY: 4500,
+      titlesData: FlTitlesData(
+        leftTitles: AxisTitles(
+          sideTitles: SideTitles(
+            showTitles: true,
+            reservedSize: 40,
+            getTitlesWidget: (value, meta) {
+              if (value == 1500) return Text('Low');
+              if (value == 3000) return Text('Middle');
+              if (value == 4500) return Text('High');
+              return SizedBox.shrink();
+            },
+          ),
+        ),
+        bottomTitles: AxisTitles(
+          sideTitles: SideTitles(
+            showTitles: true,
+            getTitlesWidget: (value, meta) {
+              switch (value.toInt()) {
+                case 0:
+                  return Text('Week 1');
+                case 1:
+                  return Text('Week 2');
+                case 2:
+                  return Text('Week 3');
+                case 3:
+                  return Text('Week 4');
+                default:
+                  return Text('');
+              }
+            },
+          ),
+        ),
+        topTitles: AxisTitles(sideTitles: SideTitles(showTitles: false)),
+        rightTitles: AxisTitles(sideTitles: SideTitles(showTitles: false)),
+      ),
+      borderData: FlBorderData(
+        show: true,
+        border: Border.all(color: Colors.indigo, width: 2),
+      ),
+      gridData: FlGridData(
+        show: true,
+        drawVerticalLine: true,
+        horizontalInterval: 500,
+        verticalInterval: 1,
+        getDrawingHorizontalLine: (value) => FlLine(
+          color: Colors.grey[300]!,
+          strokeWidth: 1,
+        ),
+        getDrawingVerticalLine: (value) => FlLine(
+          color: Colors.grey[300]!,
+          strokeWidth: 1,
+        ),
+      ),
+      lineBarsData: [
+        LineChartBarData(
+          spots: [
+            FlSpot(0, 2000),
+            FlSpot(1, 3000),
+            FlSpot(2, 2500),
+            FlSpot(3, 4000),
+          ],
+          isCurved: true,
+          color: Colors.green,
+          barWidth: 4,
+          dotData: FlDotData(show: true),
+        ),
+        LineChartBarData(
+          spots: [
+            FlSpot(0, 1800),
+            FlSpot(1, 3500),
+            FlSpot(2, 2200),
+            FlSpot(3, 3800),
+          ],
+          isCurved: true,
+          color: Colors.red,
+          barWidth: 4,
+          dotData: FlDotData(show: true),
+        ),
+      ],
+    ),
+  ),
+),
               SizedBox(height: 20),
 
           
